@@ -1,7 +1,7 @@
 import {
   CREATE_WORKOUT,
   FETCH_ALL_WORKOUTS,
-  // FETCH_SINGLE_WORKOUT,
+  DELETE_WORKOUT,
   // UPDATE_WORKOUT,
 } from "../../src/types";
 
@@ -31,15 +31,15 @@ export const createWorkout = (title, load, reps) => {
   console.log(title, load, reps);
   return (dispatch) => {
     return axios
-    .post(`http://localhost:5000/api/workouts/`, {
-      method: "POST",
-      Headers: {
-        "Content-Type": "application/json",
-      },
-      data: { title, load, reps },
-    })
-    .then((res) => {
-        console.log('hello');
+      .post(`http://localhost:5000/api/workouts/`, {
+        method: "POST",
+        Headers: {
+          "Content-Type": "application/json",
+        },
+        data: { title, load, reps },
+      })
+      .then((res) => {
+        console.log("hello");
         console.log(res.data);
         return dispatch({
           type: CREATE_WORKOUT,
@@ -48,6 +48,29 @@ export const createWorkout = (title, load, reps) => {
       })
       .catch((err) => {
         return err.message;
+      });
+  };
+};
+
+//get single workout
+
+export const deleteWorkout = (id) => {
+  return (dispatch) => {
+    return axios
+      .delete(`http://localhost:5000/api/workouts/${id}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        data: { id },
+      })
+      .then((res) => {
+        console.log(res.data);
+        return dispatch({
+          type: DELETE_WORKOUT,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        return console.log(err.message);
       });
   };
 };

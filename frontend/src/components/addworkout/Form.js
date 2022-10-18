@@ -10,11 +10,11 @@ const Form = (props) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(title);
-    console.log(load);
-    console.log(reps);
+
     createWorkout(title, load, reps);
-    console.log(typeof(createWorkout));
+    setTitle("");
+    setLoad("");
+    setReps("");
   }
 
   return (
