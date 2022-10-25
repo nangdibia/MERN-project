@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/pics/logo.jpg";
+import { logoutUser } from "../actions/userActions";
 
-const Navbar = () => {
+import { connect } from "react-redux";
+
+const Navbar = (props) => {
+  const [user, setUser] = useState([]);
+  let loginuser = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    if (!loginuser) {
+      return logoutUser();
+    } else if (user) {
+      setUser({
+        user: loginuser,
+      });
+    }
+  }, []);
+
   return (
     <>
       <div className=" ">
@@ -20,22 +35,35 @@ const Navbar = () => {
         </div>
         <div className="nav">
           <div className="nav-inner">
-            
-              <NavLink to="/">Home</NavLink>
-          
+            <NavLink to="/">Home</NavLink>
+
             <li>
               <NavLink to="/add">Add Workout</NavLink>
             </li>
           </div>
-          <div className="navsign">
-            <NavLink to="/login">Login</NavLink>
-            <NavLink to="/signup">Sign Up</NavLink>
-          </div>
+          {loginuser == null ? (
+            <div className="navsign">
+              <NavLink to="/login">Login</NavLink>
+              <NavLink to="/signup">Sign Up</NavLink>
+            </div>
+          ) : null}
+          {loginuser !== null ? (
+            <div className="navsign">
+              <span className="user-email">{loginuser.email}</span>
+              <b onClick={props.logoutUser} className="logout">
+                Logout
+              </b>
+            </div>
+          ) : null}
         </div>
       </div>
     </>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    user: [state.userReducer.users],
+  };
+};
 
-
-export default Navbar;
+export default connect(mapStateToProps, { logoutUser })(Navbar);

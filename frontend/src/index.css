@@ -47,8 +47,6 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  border-right: 1px solid grey;
-  
 }
 
 
@@ -83,6 +81,7 @@ body{
 
 .title{
   color: black;
+  font-size: 12px;
 }
 
 .title h2{
@@ -98,7 +97,7 @@ body{
 }
 
 .workouts-inner{
-  background: #eceff8;
+  background: #aec1fa;
   border-radius:5px;
   width: 350px;
   padding: 1rem;
@@ -111,16 +110,26 @@ body{
 .workouts-inner a{
   text-decoration: none;
     color: black;
-}
+  }
 
+  .workouts-inner a h3{
+  font-size: 18px;
+  font-weight: 500;
+
+  }
+
+.workouts-inner p{
+  color: #fff;
+  margin-bottom: 0;
+}
 .workouts-inner p:hover{
   color: #aa5035;
 }
 
 .workouts-inner:hover{
-  background:#fff;
-  background: #dae2fc;
+  background: #c3d1fd;
   margin-top: 5px;
+  box-shadow: 0px 5px 10px #e7e6e6;
 }
 
 
@@ -142,9 +151,9 @@ body{
 
 .form-inner form{
   padding: 2rem;
-  box-shadow: 0px 5px 10px #e7e6e6;
+  /* box-shadow: 0px 5px 10px #e7e6e6; */
   border-radius: 5px;
-  background: #eceff8;
+  background: #aec1fa;
   width: 600px;
   display: flex;
   flex-direction: column;
@@ -163,7 +172,8 @@ body{
   width: 100%;
   border: none;
   outline-width: none;
-  background: #c2d0ff;
+  background: #6a8dff;
+  color: #fff;
   border-radius: 3px;
   width: 400px;
   padding: 5px;
@@ -192,4 +202,22 @@ body{
   outline-width: none;
   border:0;
   outline: none;
+}
+.logout{
+  font-size: 14px;
+  padding: 3px 10px;
+  border-radius: 30px;
+  margin-left: 10px;
+  border: 2px solid #2255ff;
+  color: #2255ff;
+  cursor: pointer;
+}
+.user-email{
+  font-size: 14px;
+  color:#2255ff;
+}
+
+.input-error{
+  font-size: 13px;
+  color: #aa5035;
 }

@@ -1,21 +1,37 @@
 import React from "react";
 
-const Login = () => {
+const Login = (props) => {
+  const { onChange, handleSubmit, email, password, error } =
+    props;
   return (
     <div>
       <div className="form-inner">
-        <h1>Sign Up</h1>
-        <form>
+        <h1>Login</h1>
+        <form onSubmit={handleSubmit}>
           <div className="">
-            <label htmlFor="">Enter your username</label>
-            <input type="text" name="username" />
+            <label htmlFor="">Enter your Email</label>
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={onChange}
+            />
           </div>
           <div className="">
             <label htmlFor="">Enter your password </label>
-            <input type="text" name="password" />
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={onChange}
+            />
           </div>
-        
-          <input type="submit" value="Login" id="btn" />
+         
+          <span className="text-danger input-error">{error}</span>
+          <button id="btn" type="submit">
+            Login
+          </button>
+          {/* <input type="submit" value="Sign Up" id="btn" /> */}
         </form>
       </div>
     </div>

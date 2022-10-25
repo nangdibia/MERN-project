@@ -15,7 +15,7 @@ const userSchema = new Schema({
   },
 });
 
-// static dignup method
+// static dignup method 
 
 userSchema.statics.signup = async function (email, password) {
   if (!email || !password) {

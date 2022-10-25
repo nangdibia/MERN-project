@@ -10,8 +10,14 @@ const Form = (props) => {
 
   function handleSubmit(e) {
     e.preventDefault();
+    let user = JSON.parse(localStorage.getItem("user"));
 
-    createWorkout(title, load, reps);
+    // let user = this.props.user;
+    console.log(user);
+    if (user) {
+      createWorkout(title, load, reps, user);
+    }
+
     setTitle("");
     setLoad("");
     setReps("");
@@ -61,8 +67,10 @@ const Form = (props) => {
   );
 };
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = (state) => {
+  return {
+    user: [...state.userReducer.users],
+  };
 };
 
 export default connect(mapStateToProps, { createWorkout })(Form);

@@ -27,28 +27,31 @@ export const fetchAllWorkouts = () => {
 
 //create new workout
 
-export const createWorkout = (title, load, reps) => {
+export const createWorkout = (title, load, reps, user) => {
   console.log(title, load, reps);
   return (dispatch) => {
-    return axios
-      .post(`http://localhost:5000/api/workouts/`, {
-        method: "POST",
-        Headers: {
-          "Content-Type": "application/json",
-        },
-        data: { title, load, reps },
-      })
-      .then((res) => {
-        console.log("hello");
-        console.log(res.data);
-        return dispatch({
-          type: CREATE_WORKOUT,
-          payload: res.data,
+    if (user) {
+      console.log(user);
+      return axios
+        .post(`http://localhost:5000/api/workouts/`, {
+          method: "POST",
+          Headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${user.token}`,
+          },
+          data: { title, load, reps },
+        })
+        .then((res) => {
+          console.log(res.data);
+          return dispatch({
+            type: CREATE_WORKOUT,
+            payload: res.data,
+          });
+        })
+        .catch((err) => {
+          return err.message;
         });
-      })
-      .catch((err) => {
-        return err.message;
-      });
+    }
   };
 };
 

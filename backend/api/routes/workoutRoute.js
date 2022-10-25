@@ -1,7 +1,14 @@
 const express = require("express");
-const Router = express.Router();
 const workoutController = require("../controllers/workoutController");
+const {requireAuth }= require("../../middlewares/requireAuth");
+const Router = express.Router();
+// const router = require("./userRoute");
 
+
+// require authorization for all workouts routes
+Router.use(requireAuth);
+
+// all workouts routes
 Router.get("/", workoutController.getAllWorkouts);
 Router.post("/", workoutController.createWorkout);
 Router.get("/:id", workoutController.getSingleWorkouts);

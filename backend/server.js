@@ -4,6 +4,7 @@ require("dotenv").config();
 const cors = require("cors");
 const workoutRoute = require("./api/routes/workoutRoute");
 const userRoute = require("./api/routes/userRoute");
+const requireAuth = require('./middlewares/requireAuth')
 const app = express();
 
 //middlewares

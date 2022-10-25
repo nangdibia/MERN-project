@@ -1,12 +1,21 @@
-import {fetchAllWorkouts} from "../actions/workoutActions";
+import { fetchAllWorkouts } from "../actions/workoutActions";
 import { connect } from "react-redux";
 import ListOfWorkouts from "./ListOfWorkouts";
-
+// import { LOGIN } from "../types";
+import { loginUser } from "../actions/userActions";
 import React, { Component } from "react";
 
 export class Home extends Component {
   componentDidMount() {
     this.props.fetchAllWorkouts();
+    let user = JSON.parse(localStorage.getItem("user"));
+
+    // logging in user after refresh
+
+    if (user) {
+      const { email, password } = user;
+      return this.props.loginUser(email, password);
+    }
   }
   render() {
     return (
@@ -31,7 +40,8 @@ export class Home extends Component {
 const mapStateToProps = (state) => {
   return {
     workouts: [...state.workoutReducer.workouts],
+    workouts: [...state.userReducer.users],
   };
 };
 
-export default connect(mapStateToProps, { fetchAllWorkouts })(Home);
+export default connect(mapStateToProps, { fetchAllWorkouts, loginUser })(Home);
